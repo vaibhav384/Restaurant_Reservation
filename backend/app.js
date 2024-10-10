@@ -10,8 +10,8 @@ dotenv.config({ path: "./config/config.env" });
 
 app.use(
   cors({
-    origin: 'https://restaurant-reservation-zeta-one.vercel.app/',
-    methods: ["POST"],
+    origin: 'https://restaurant-reservation-zeta-one.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   })
 );
