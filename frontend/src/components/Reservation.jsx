@@ -17,24 +17,36 @@ const Reservation = () => {
   const handleReservation = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        "https://restaurant-reservation-yjgy.onrender.com/api/v1/reservation/send",
-        { firstName, lastName, email, phone, date, time },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
+      const checkResponse = await axios.post(
+        "https://restaurant-reservation-yjgy.onrender.com/api/v1/reservation/check",
+        { date, time },
+        { headers: { "Content-Type": "application/json" } }
       );
-      toast.success(data.message);
-      setFirstName("");
-      setLastName("");
-      setPhone(0);
-      setEmail("");
-      setTime("");
-      setDate("");
-      navigate("/success");
+
+      if(checkResponse.data.message === "Time is available."){
+        const { data } = await axios.post(
+          "https://restaurant-reservation-yjgy.onrender.com/api/v1/reservation/send",
+          { firstName, lastName, email, phone, date, time },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+        );
+        toast.success(data.message);
+        setFirstName("");
+        setLastName("");
+        setPhone(0);
+        setEmail("");
+        setTime("");
+        setDate("");
+        navigate("/success");
+      }
+      else{
+        // Show message that time is already reserved
+        toast.error(checkResponse.data.message);
+      }
     } catch (error) {
       toast.error(error.response.data.message);
     }
