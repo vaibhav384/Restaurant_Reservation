@@ -1,6 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { data } from "../restApi.json";
+import ScrollReveal from "scrollreveal";
+
 const Team = () => {
+  useEffect(() => {
+    const sr = ScrollReveal({
+      distance: '5rem',
+      duration: 2000,
+      reset: true,
+    });
+
+    // Reveal each card with different delay and origin
+    // sr.reveal(".team .card", { delay: 170, origin: "left" });
+
+    const teamCards = document.querySelectorAll(".team .card");
+    teamCards.forEach((card, index) => {
+      sr.reveal(card, {
+        delay: 170 * index,  // Delay increases with each card
+        origin: "left",    // All cards come from the bottom
+      });
+    });
+  }, []);
+
   return (
     <section className="team" id="team">
       <div className="container">

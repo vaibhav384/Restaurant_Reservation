@@ -563,7 +563,7 @@ nav svg {
 }
 .menu .container .dishes_container .card:hover img {
   transition: 0.3s;
-  transform: scale(1.03);
+  transform: scale(1.07);
 }
 @media (max-width: 1520px) {
   .menu .container {
@@ -1111,4 +1111,26 @@ footer .container .banner .right {
     font-size: 1.75rem;
   }
 }
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+.reservation .banner img {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+
+
+
 /**********************************************************************************************************************/
